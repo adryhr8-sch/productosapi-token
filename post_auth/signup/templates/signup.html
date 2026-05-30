@@ -1,0 +1,31 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %} Registro de usuario {% endblock %}
+{% block content %}
+<div class="card shadow-sm">
+    <div class="card-body">
+        <h1 class="card-title mb-4 text-center">Registro de usuario</h1>
+        <form method="post" novalidate>
+            {% csrf_token %}
+            <div class="mb-3">
+                <label for="username" class="form-label">Nombre de usuario</label>
+                <input id="username" name="username" type="text" class="form-control" value="{{ username|default:'' }}" required>
+                {% if errors.username %}
+                    <div class="text-danger mt-1">{{ errors.username }}</div>
+                {% endif %}
+            </div>
+            <div class="mb-3">
+                <label for="password" class="form-label">Contraseña</label>
+                <input id="password" name="password" type="password" class="form-control" required>
+                {% if errors.password %}
+                    <div class="text-danger mt-1">{{ errors.password }}</div>
+                {% endif %}
+            </div>
+            <button type="submit" class="btn btn-primary w-100">Registrarse</button>
+        </form>
+        <div class="mt-4 alert alert-info">
+            Después de registrarte, cierra esta página y usa tu usuario y contraseña para pedir un token en <code>/signup/token/</code>.
+        </div>
+    </div>
+</div>
+{% endblock %}
